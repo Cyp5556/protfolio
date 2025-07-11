@@ -34,14 +34,66 @@ const Portfolio = () => {
   };
 
   const skills = [
-    { name: 'React', level: 60 },
-    { name: 'JavaScript', level: 70 },
-    { name: 'Node.js', level: 40 },
-    { name: 'Python', level: 75 },
-    { name: 'MYSQL', level: 50 },
-    { name: 'MongoDB', level: 60 },
-    { name: 'Git', level: 65 },
-    { name: 'Azure', level: 45 }
+    { 
+      name: 'React', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+      category: 'Frontend'
+    },
+    { 
+      name: 'JavaScript', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+      category: 'Language'
+    },
+    { 
+      name: 'Node.js', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+      category: 'Backend'
+    },
+    { 
+      name: 'Python', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+      category: 'Language'
+    },
+    { 
+      name: 'MySQL', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+      category: 'Database'
+    },
+    { 
+      name: 'MongoDB', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+      category: 'Database'
+    },
+    { 
+      name: 'Git', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+      category: 'Tools'
+    },
+    { 
+      name: 'Azure', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg',
+      category: 'Cloud'
+    },
+    { 
+      name: 'HTML5', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+      category: 'Frontend'
+    },
+    { 
+      name: 'CSS3', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+      category: 'Frontend'
+    },
+    { 
+      name: 'Tailwind CSS', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+      category: 'Frontend'
+    },
+    { 
+      name: 'Express.js', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+      category: 'Backend'
+    }
   ];
 
   const projects = [
@@ -240,21 +292,54 @@ const Portfolio = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {skills.map((skill, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="font-semibold text-gray-800">{skill.name}</span>
-                  <span className="text-blue-600">{skill.level}%</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-blue-600 h-2 rounded-full transition-all duration-1000"
-                    style={{ width: `${skill.level}%` }}
-                  />
-                </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Technology
+                      </th>
+                      <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Category
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {skills.map((skill, index) => (
+                      <tr key={index} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <img 
+                              src={skill.icon} 
+                              alt={skill.name}
+                              className="h-8 w-8 mr-3 flex-shrink-0"
+                              onError={(e) => {
+                                e.target.style.display = 'none';
+                              }}
+                            />
+                            <span className="text-base font-medium text-gray-900">{skill.name}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${
+                            skill.category === 'Frontend' ? 'bg-blue-100 text-blue-800' :
+                            skill.category === 'Backend' ? 'bg-green-100 text-green-800' :
+                            skill.category === 'Database' ? 'bg-purple-100 text-purple-800' :
+                            skill.category === 'Language' ? 'bg-orange-100 text-orange-800' :
+                            skill.category === 'Tools' ? 'bg-gray-100 text-gray-800' :
+                            'bg-indigo-100 text-indigo-800'
+                          }`}>
+                            {skill.category}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -288,13 +373,13 @@ const Portfolio = () => {
                     ))}
                   </div>
                   <div className="flex gap-6">
-                    <a 
+                    {/* <a 
                       href={project.github}
                       className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors text-lg"
                     >
                       <Github className="h-5 w-5" />
                       Code
-                    </a>
+                    </a> */}
                     <a 
                       href={project.live}
                       className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors text-lg"
